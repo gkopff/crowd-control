@@ -8,6 +8,7 @@ target
 .idea/libraries/
 .idea/scala_settings.xml
 .idea/dictionaries/
+.idea/copyright/
 
 # Mac
 .DS_Store
