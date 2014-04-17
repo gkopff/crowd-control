@@ -139,7 +139,6 @@ public class AuthenticationInteractor
    */
   private AuthenticationResponse buildResponse(String json)
   {
-    System.out.println(json);
     final Gson gson = new GsonBuilder().create();
     return gson.fromJson(json, AuthenticationResponse.class);
   }
