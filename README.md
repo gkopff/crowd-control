@@ -2,6 +2,16 @@
 
 A simple wrapper around the Atlassian Crowd REST API for authenticating against a Crowd server.
 
+## Getting it
+
+````
+<dependency>
+  <groupId>com.fatboyindustrial.crowd-control</groupId>
+  <artifactId>crowd-control</artifactId>
+  <version>0.1.0</version>
+</dependency>
+````
+
 ## How to use
 
 ````
