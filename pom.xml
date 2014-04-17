@@ -182,6 +182,12 @@
       <version>1.3</version>
       <scope>test</scope>
     </dependency>
+    <dependency>                               <!-- JSON comparisons -->
+      <groupId>uk.co.datumedge</groupId>
+      <artifactId>hamcrest-json</artifactId>
+      <version>0.2</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>                               <!-- GSON -->
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
