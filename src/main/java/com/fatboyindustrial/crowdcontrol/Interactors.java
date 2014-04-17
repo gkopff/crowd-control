@@ -26,25 +26,7 @@ package com.fatboyindustrial.crowdcontrol;
 import javax.annotation.concurrent.Immutable;
 
 /**
- * Factory for creating specific interactors. <p/>
- *
- * Use as follows: <p/>
- *
- * <pre>
- *    final Either<AuthenticationResponse, AuthenticationError> result =
- *        Interactors.authentication("http://localhost:8095/crowd", "appName", "appPass").execute("userName", "userPass");
- *
- *    if (! result.isError())
- *    {
- *      final AuthenticationResponse response = result.getValue();
- *      System.out.println(response);
- *    }
- *    else
- *    {
- *      final AuthenticationError error = result.getError();
- *      System.out.println(error);
- *    }
- * </pre>
+ * Factory for creating specific interactors.
  */
 @Immutable
 public class Interactors
