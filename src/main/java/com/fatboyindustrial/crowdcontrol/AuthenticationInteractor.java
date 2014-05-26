@@ -127,7 +127,7 @@ public class AuthenticationInteractor
    * @param password The password to use in the request.
    * @return The JSON.
    */
-  private String json(String password)
+  private static String json(String password)
   {
     final Gson gson = new GsonBuilder().create();
     return gson.toJson(new AuthenticationRequest(password));
@@ -138,7 +138,7 @@ public class AuthenticationInteractor
    * @param json The JSON.
    * @return The object.
    */
-  private AuthenticationResponse buildResponse(String json)
+  private static AuthenticationResponse buildResponse(String json)
   {
     final Gson gson = new GsonBuilder().create();
     return gson.fromJson(json, AuthenticationResponse.class);
@@ -149,7 +149,7 @@ public class AuthenticationInteractor
    * @param json The JSON.
    * @return The object.
    */
-  private AuthenticationError buildError(String json)
+  private static AuthenticationError buildError(String json)
   {
     final Gson gson = new GsonBuilder().create();
     return gson.fromJson(json, AuthenticationError.class);
