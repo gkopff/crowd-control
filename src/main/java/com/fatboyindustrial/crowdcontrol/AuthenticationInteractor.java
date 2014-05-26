@@ -29,12 +29,13 @@ import com.fatboyindustrial.crowdcontrol.model.AuthenticationResponse;
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
+import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 
 import javax.annotation.concurrent.Immutable;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -81,18 +82,18 @@ public class AuthenticationInteractor
     Preconditions.checkNotNull(username, "username cannot be null");
     Preconditions.checkNotNull(password, "password cannot be null");
     
-    final WebResource resource = resource(newClient(), username);
-    final ClientResponse response = resource.accept(MediaType.APPLICATION_JSON_TYPE)
-        .entity(json(password), MediaType.APPLICATION_JSON_TYPE)
-        .post(ClientResponse.class);
+    final WebTarget target = resource(newClient(), username);
+    final Response response = target.request()
+        .accept(MediaType.APPLICATION_JSON_TYPE)
+        .post(Entity.entity(json(password), MediaType.APPLICATION_JSON_TYPE), Response.class);
 
     if (response.getStatus() == Response.Status.OK.getStatusCode())
     {
-      return Either.value(buildResponse(response.getEntity(String.class)));
+      return Either.value(buildResponse(response.readEntity(String.class)));
     }
     else
     {
-      return Either.error(buildError(response.getEntity(String.class)));
+      return Either.error(buildError(response.readEntity(String.class)));
     }
   }
 
@@ -102,21 +103,21 @@ public class AuthenticationInteractor
    */
   private Client newClient()
   {
-    final Client client = Client.create();
-    client.addFilter(new HTTPBasicAuthFilter(this.appName, this.appPassword));
+    final Client client = ClientBuilder.newBuilder().build();
+    client.register(HttpAuthenticationFeature.basic(this.appName, this.appPassword));
 
     return client;
   }
 
   /**
-   * Creates a new web resource for the authentication URL.
+   * Creates a new web target for the authentication URL.
    * @param client The HTTP client.
    * @param username The username to authenticate.
-   * @return The web resource.
+   * @return The web target.
    */
-  private WebResource resource(Client client, String username)
+  private WebTarget resource(Client client, String username)
   {
-    return client.resource(this.crowdBase)
+    return client.target(this.crowdBase)
         .path("rest/usermanagement/latest/authentication")
         .queryParam("username", username);
   }
