@@ -29,7 +29,7 @@
 
   <groupId>com.fatboyindustrial.crowd-control</groupId>
   <artifactId>crowd-control</artifactId>
-  <version>0.3.0-SNAPSHOT</version>
+  <version>0.3.0</version>
   <packaging>jar</packaging>
 
   <name>crowd-control</name>
@@ -47,6 +47,7 @@
     <url>https://github.com/gkopff/crowd-control</url>
     <connection>scm:git:https://github.com/gkopff/crowd-control.git</connection>
     <developerConnection>scm:git:git@github.com:gkopff/crowd-control.git</developerConnection>
+    <tag>0.3.0</tag>
   </scm>
   
   <developers>
