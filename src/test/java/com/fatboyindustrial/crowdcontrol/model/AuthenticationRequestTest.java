@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Greg Kopff
+ * Copyright 2014-2018 Greg Kopff
  * All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -48,14 +48,5 @@ public class AuthenticationRequestTest
     final String actual = gson.toJson(new AuthenticationRequest("what is six times nine"));
 
     assertThat(actual, is(sameJSONAs(expected)));
-  }
-
-  /**
-   * Tests that the expected non-null precondition check works.
-   */
-  @Test(expected =  NullPointerException.class)
-  public void testPreconditions()
-  {
-    new AuthenticationRequest(null);
   }
 }

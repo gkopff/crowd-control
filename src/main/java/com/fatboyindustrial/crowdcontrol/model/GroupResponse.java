@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 Greg Kopff
+ * Copyright 2018 Greg Kopff
  * All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,30 +23,61 @@
 
 package com.fatboyindustrial.crowdcontrol.model;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import org.json.JSONException;
-import org.junit.Test;
+import com.google.common.base.Preconditions;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-import static uk.co.datumedge.hamcrest.json.SameJSONAs.sameJSONAs;
+import javax.annotation.concurrent.Immutable;
 
 /**
- * Tests for {@link Link}.
+ * Model representing a group membership (positive) response.
  */
-public class LinkTest
+@Immutable
+public class GroupResponse
 {
-  /**
-   * Tests that the object encodes to the expected JSON.
-   */
-  @Test
-  public void testJson() throws JSONException
-  {
-    final Gson gson = new GsonBuilder().create();
-    final String expected = "{ \"rel\": \"self\", \"href\": \"http://localhost:8095/crowd/rest/foo?arg=value\" }";
-    final String actual = gson.toJson(new Link("self", "http://localhost:8095/crowd/rest/foo?arg=value"));
+  /** The link to the user. */
+  private final Link link;
 
-    assertThat(actual, is(sameJSONAs(expected)));
+  /** The username. */
+  private final String name;
+
+  /**
+   * Constructor.
+   * @param link The link to the user resource.
+   * @param username The username.
+   */
+  public GroupResponse(Link link, String username)
+  {
+    this.link = Preconditions.checkNotNull(link, "link cannot be null");
+    this.name = Preconditions.checkNotNull(username, "username cannot be null");
+  }
+
+  /**
+   * Gets the link to the user resource.
+   * @return The user resource link.
+   */
+  public Link getLink()
+  {
+    return this.link;
+  }
+
+  /**
+   * Gets the username.
+   * @return The username.
+   */
+  public String getUsername()
+  {
+    return this.name;
+  }
+
+  /**
+   * Gets a string representation.
+   * @return The object as a String.
+   */
+  @Override
+  public String toString()
+  {
+    return "GroupResponse{" +
+           "link=" + this.link +
+           ", name='" + this.name + '\'' +
+           '}';
   }
 }
