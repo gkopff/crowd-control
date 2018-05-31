@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Greg Kopff
+ * Copyright 2014-2018 Greg Kopff
  * All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -50,23 +50,5 @@ public class AuthenticationErrorTest
                                                               "Failed to authenticate principal."));
 
     assertThat(actual, is(sameJSONAs(expected)));
-  }
-
-  /**
-   * Tests that the expected non-null precondition check works.
-   */
-  @Test(expected =  NullPointerException.class)
-  public void testPreconditionsNullReason()
-  {
-    new AuthenticationError(null, "Failed to authenticate principal.");
-  }
-
-  /**
-   * Tests that the expected non-null precondition check works.
-   */
-  @Test(expected =  NullPointerException.class)
-  public void testPreconditionsNullMessage()
-  {
-    new AuthenticationError("INVALID_USER_AUTHENTICATION", null);
   }
 }

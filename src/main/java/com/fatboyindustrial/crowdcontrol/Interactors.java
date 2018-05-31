@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Greg Kopff
+ * Copyright 2014-2018 Greg Kopff
  * All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -41,5 +41,17 @@ public class Interactors
   public static AuthenticationInteractor authentication(String baseUrl, String appName, String appPassword)
   {
     return new AuthenticationInteractor(baseUrl, appName, appPassword);
+  }
+
+  /**
+   * Creates a group interactor, useful for determining what group a user belongs to.
+   * @param baseUrl The Crowd base URL.
+   * @param appName The application name as defined in Crowd.
+   * @param appPassword The application password as defined in Crowd.
+   * @return The interactor.
+   */
+  public static GroupInteractor checkUserGroup(String baseUrl, String appName, String appPassword)
+  {
+    return new GroupInteractor(baseUrl, appName, appPassword);
   }
 }

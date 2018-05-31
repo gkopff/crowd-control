@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2018 Greg Kopff
+ * Copyright 2018 Greg Kopff
  * All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,10 +32,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static uk.co.datumedge.hamcrest.json.SameJSONAs.sameJSONAs;
 
-/**
- * Tests for {@link Link}.
- */
-public class LinkTest
+public class GroupResponseTest
 {
   /**
    * Tests that the object encodes to the expected JSON.
@@ -44,8 +41,15 @@ public class LinkTest
   public void testJson() throws JSONException
   {
     final Gson gson = new GsonBuilder().create();
-    final String expected = "{ \"rel\": \"self\", \"href\": \"http://localhost:8095/crowd/rest/foo?arg=value\" }";
-    final String actual = gson.toJson(new Link("self", "http://localhost:8095/crowd/rest/foo?arg=value"));
+    final String expected =
+        "{ " +
+        "\"link\": { \"rel\": \"self\", \"href\": \"http://localhost/rest/usermanagement/latest/user?username=bruce\" }," +
+        "\"name\": \"Bruce\"," +
+        "}";
+
+    final String actual = gson.toJson(new GroupResponse(
+        new Link("self", "http://localhost/rest/usermanagement/latest/user?username=bruce"),
+        "Bruce"));
 
     assertThat(actual, is(sameJSONAs(expected)));
   }
